@@ -5,7 +5,8 @@
 ## Install
 
 ```sh
-yarn add --dev babel-plugin-private-underscores
+npm i mdwagner/babel-plugin-private-underscores -D
+yarn add mdwagner/babel-plugin-private-underscores -D
 ```
 
 ## Example
@@ -27,7 +28,7 @@ class Foo {
 **Output**
 
 ```js
-let _method = Symbol('_method');
+const _method = Symbol('_method');
 class Foo {
   constructor() {
     this[_method]();
@@ -44,7 +45,7 @@ class Foo {
 ```js
 {
   "plugins": [
-    "private-underscores"
+    "private-underscores-const"
   ]
 }
 ```
