@@ -1,12 +1,12 @@
-# babel-plugin-private-underscores
+# babel-plugin-private-underscores-const
 
 > Make _classMembers 'private' using symbols
 
 ## Install
 
 ```sh
-npm i mdwagner/babel-plugin-private-underscores -D
-yarn add mdwagner/babel-plugin-private-underscores -D
+npm i mdwagner/babel-plugin-private-underscores-const -D
+yarn add mdwagner/babel-plugin-private-underscores-const -D
 ```
 
 ## Example
