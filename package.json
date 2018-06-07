@@ -19,6 +19,7 @@
   ],
   "scripts": {
     "postinstall": "npm run build",
+    "prepare": "npm run build",
     "build": "tsc",
     "test": "jest"
   },
@@ -26,14 +27,17 @@
     "@types/babel-core": "^6.25.4",
     "@types/jest": "^23.0.0",
     "babel-core": "^6.26.3",
+    "babel-plugin-syntax-class-properties": "^6.13.0",
     "jest": "^23.1.0",
+    "strip-indent": "^2.0.0",
     "ts-jest": "^22.4.6",
     "typescript": "^2.9.1"
   },
   "jest": {
     "moduleFileExtensions": [
       "ts",
-      "js"
+      "js",
+      "json"
     ],
     "transform": {
       "^.+\\.tsx?$": "ts-jest"

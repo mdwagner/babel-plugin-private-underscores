@@ -19,6 +19,8 @@ export default function privateUnderscoress({ types: t, template }: any): babel.
               SYM: t.stringLiteral(name)
             })
           );
+
+          return ref;
         }
 
         classPath.traverse({
