@@ -3,6 +3,7 @@
   "version": "1.0.1",
   "description": "Make _classMembers 'private' using symbols",
   "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "repository": "mdwagner/babel-plugin-private-underscores-const",
   "author": "Michael Wagner <mdwranger@gmail.com>",
   "license": "MIT",
@@ -16,9 +17,27 @@
     "private",
     "const"
   ],
+  "scripts": {
+    "postinstall": "npm run build",
+    "build": "tsc",
+    "test": "jest"
+  },
   "devDependencies": {
     "@types/babel-core": "^6.25.4",
+    "@types/jest": "^23.0.0",
     "babel-core": "^6.26.3",
+    "jest": "^23.1.0",
+    "ts-jest": "^22.4.6",
     "typescript": "^2.9.1"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "__tests__\\/.*\\.test\\.tsx?"
   }
 }

@@ -1,61 +1,57 @@
-// @flow
-'use strict';
-
-function privateUnderscores({ types: t, template } /*: any */) {
-  let buildSym = template(`
-    let ID = Symbol(SYM);
+export default function privateUnderscoress({ types: t, template }: any): babel.PluginObj {
+  const buildSym = template(`
+    const ID = Symbol(SYM);
   `);
 
   return {
-    name: "private-underscores",
+    name: 'private-underscores-const',
     visitor: {
-      Class(classPath /*: any */) {
-        let members = {};
-        let program = classPath.hub.file.path;
+      Class(classPath: any) {
+        const members: any = {};
+        const program = classPath.hub.file.path;
 
-        function createReference(name) {
-          let ref = classPath.scope.generateUidIdentifier(name);
+        function createReference(name: any) {
+          const ref = classPath.scope.generateUidIdentifier(name);
 
-          program.get('body')[0].insertBefore(buildSym({
-            ID: ref,
-            SYM: t.stringLiteral(name)
-          }));
-
-          return ref;
+          program.get('body')[0].insertBefore(
+            buildSym({
+              ID: ref,
+              SYM: t.stringLiteral(name)
+            })
+          );
         }
 
         classPath.traverse({
-          'ClassMethod|ClassProperty'(memberPath) {
+          'ClassMethod|ClassProperty'(memberPath: any) {
             if (memberPath.node.computed) return;
-            let name = memberPath.node.key.name;
+            const name = memberPath.node.key.name;
             if (!name.startsWith('_')) return;
 
-            let ref = createReference(name);
+            const ref = createReference(name);
 
             members[name] = ref;
             memberPath.node.computed = true;
             memberPath.get('key').replaceWith(ref);
-          },
+          }
         });
 
         classPath.traverse({
-          ThisExpression(path) {
-            let parent = path.parentPath;
+          ThisExpression(path: any) {
+            const parent = path.parentPath;
 
             if (parent.isMemberExpression() && !parent.node.computed) {
-              let property = parent.get('property');
-              let ref = members[property.node.name];
+              const property = parent.get('property');
+              const ref = members[property.node.name];
 
               if (ref) {
                 parent.node.computed = true;
-                property.replaceWith(ref)
+                property.replaceWith(ref);
               }
             }
-          },
+          }
         });
-      },
-    },
+
+      }
+    }
   };
 }
-
-module.exports = privateUnderscores;
